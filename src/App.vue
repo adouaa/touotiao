@@ -1,10 +1,21 @@
 <template>
   <div class="app">
-    <h2>黑马头条</h2>
-    <div class="toutiao toutiao-shouye"></div>
+    <router-view></router-view>
   </div>
 </template>
 
-<script setup></script>
+<script setup name="app">
+// import { articles } from './api/article'
 
-<style lang="less" scoped></style>
+// articles().then((res) => {
+//   console.log(res)
+// })
+</script>
+
+<style lang="less" scoped>
+.a {
+  width: 555px;
+  height: 64px;
+  background-color: pink;
+}
+</style>
