@@ -1,24 +1,39 @@
 @font-face {
-  font-family: "toutiao";
+  font-family: 'toutiao';
   /* Project id 3988367 */
-  src: url('//at.alicdn.com/t/c/font_3988367_6isqvag8z8m.woff2?t=1680230758720') format('woff2'), url('//at.alicdn.com/t/c/font_3988367_6isqvag8z8m.woff?t=1680230758720') format('woff'), url('//at.alicdn.com/t/c/font_3988367_6isqvag8z8m.ttf?t=1680230758720') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_3988367_6p9bs32qmx7.woff2?t=1680249882484') format('woff2'), url('//at.alicdn.com/t/c/font_3988367_6p9bs32qmx7.woff?t=1680249882484') format('woff'), url('//at.alicdn.com/t/c/font_3988367_6p9bs32qmx7.ttf?t=1680249882484') format('truetype');
 }
 .toutiao {
-  font-family: "toutiao" !important;
+  font-family: 'toutiao' !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.toutiao-shouji:before {
+  content: '\e602';
+}
+.toutiao-mima:before {
+  content: '\e605';
+}
 .toutiao-shouye:before {
-  content: "\e6cb";
+  content: '\e6cb';
 }
 .toutiao-wode:before {
-  content: "\e8a0";
+  content: '\e8a0';
 }
 .toutiao-shipinbofang:before {
-  content: "\e600";
+  content: '\e600';
 }
 .toutiao-xiaoxi:before {
-  content: "\e609";
+  content: '\e609';
+}
+body {
+  background-color: #f5f7f9;
+}
+.page-nav-bar {
+  background-color: #3296fa !important;
+}
+.page-nav-bar .van-nav-bar__title {
+  color: #fff;
 }
