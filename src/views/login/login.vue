@@ -2,11 +2,11 @@
   <div class="login">
     <van-nav-bar class="page-nav-bar" title="登录" />
 
-    <van-form @submit="onSubmit">
+    <van-form @submit="onSubmit" ref="loginRef">
       <van-cell-group inset>
         <van-field
           v-model="loginForm.mobile"
-          name="用户名"
+          name="mobile"
           placeholder="请输入手机号"
           :rules="loginRules.mobile"
           type="number"
@@ -28,9 +28,9 @@
             <i style="font-size: 20px" class="toutiao toutiao-mima"></i>
           </template>
           <template #button>
-            <van-button round class="code-button" size="small" type="primary"
-              >发送验证码</van-button
-            >
+            <van-button @click="sendCode" round class="code-button" size="small" type="primary">{{
+              time > 0 ? time + 's' : '发送验证码'
+            }}</van-button>
           </template>
         </van-field>
       </van-cell-group>
@@ -53,11 +53,15 @@
 
 <script setup name="login">
 import { reactive, computed, ref } from 'vue'
-import { login } from '@/api/user'
-import { showLoadingToast, showSuccessToast, showFailToast } from 'vant'
+import { login, getCode } from '@/api/user'
+import { showLoadingToast, showSuccessToast, showFailToast, showToast } from 'vant'
+import getCodeTime from '@/hooks/useCodeTime'
+import useUsetStore from '@/store/modules/user'
 
+// 登录逻辑
+const userStore = useUsetStore()
 const loginForm = reactive({
-  mobile: 13911111111,
+  mobile: 1391111111,
   code: ''
 })
 const loginRules = {
@@ -79,8 +83,8 @@ const onSubmit = async () => {
     })
     isLoading.value = true
     const res = await login(loginForm)
+    userStore.setUserInfo(res.data)
     showSuccessToast('登录成功')
-    console.log(res)
   } catch (error) {
     if (error.response.status === 400) {
       showFailToast('手机号或者密码错误')
@@ -98,6 +102,30 @@ const disabled = computed(() => {
   // return loginForm.mobile && loginForm.code 不能直接返回 &&，要返回 Boolean，所以必须加上 三目运算符
 })
 const isLoading = ref(false)
+
+// 验证码逻辑
+const time = ref()
+const loginRef = ref()
+const sendCode = async () => {
+  try {
+    await loginRef.value.validate('mobile')
+  } catch (error) {
+    showFailToast(error.message)
+    return
+  }
+  try {
+    if (time.value > 0) return showFailToast(`还有${time.value}秒后才能再次发送，请耐心等待哦`)
+    await getCode(loginForm.mobile)
+    showToast('发送成功')
+    time.value = getCodeTime(time)
+  } catch (error) {
+    if (error.response.status === 429) {
+      return showToast('发送过于频繁，请稍后重试')
+    } else {
+      return showToast('发送失败，请稍后重试')
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
