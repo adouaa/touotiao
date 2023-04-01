@@ -4,12 +4,26 @@
 
     <van-form @submit="onSubmit">
       <van-cell-group inset>
-        <van-field v-model="loginForm.mobile" name="用户名" placeholder="请输入手机号">
+        <van-field
+          v-model="loginForm.mobile"
+          name="用户名"
+          placeholder="请输入手机号"
+          :rules="loginRules.mobile"
+          type="number"
+          maxlength="11"
+        >
           <template #left-icon>
             <i style="font-size: 20px" class="toutiao toutiao-shouji"></i>
           </template>
         </van-field>
-        <van-field v-model="loginForm.code" name="密码" placeholder="请输入验证码">
+        <van-field
+          v-model="loginForm.code"
+          name="密码"
+          placeholder="请输入验证码"
+          :rules="loginRules.code"
+          type="number"
+          maxlength="6"
+        >
           <template #left-icon>
             <i style="font-size: 20px" class="toutiao toutiao-mima"></i>
           </template>
@@ -40,22 +54,38 @@
 <script setup name="login">
 import { reactive, computed, ref } from 'vue'
 import { login } from '@/api/user'
+import { showLoadingToast, showSuccessToast, showFailToast } from 'vant'
 
 const loginForm = reactive({
   mobile: 13911111111,
   code: ''
 })
+const loginRules = {
+  mobile: [
+    { required: true, message: '手机号不能为空' },
+    { pattern: /^1[3 | 5 | 7 | 8]\d{9}$/, message: '手机号格式错误' }
+  ],
+  code: [
+    { required: true, message: '验证码不能为空' },
+    { pattern: /^\d{6}$/, message: '验证码格式错误' }
+  ]
+}
 const onSubmit = async () => {
   if (disabled.value) return
   try {
+    showLoadingToast({
+      message: '登录中',
+      forbidClick: true
+    })
     isLoading.value = true
     const res = await login(loginForm)
+    showSuccessToast('登录成功')
     console.log(res)
   } catch (error) {
     if (error.response.status === 400) {
-      console.log('手机号或者密码错误')
+      showFailToast('手机号或者密码错误')
     } else {
-      console.log('未知错误，请稍后重试')
+      showFailToast('未知错误，请稍后重试')
     }
   }
   isLoading.value = false
