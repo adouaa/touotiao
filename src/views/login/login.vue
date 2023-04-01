@@ -1,6 +1,10 @@
 <template>
   <div class="login">
-    <van-nav-bar class="page-nav-bar" title="登录" />
+    <van-nav-bar class="page-nav-bar" title="登录">
+      <template #left>
+        <van-icon @click="$router.back()" name="cross" />
+      </template>
+    </van-nav-bar>
 
     <van-form @submit="onSubmit" ref="loginRef">
       <van-cell-group inset>
