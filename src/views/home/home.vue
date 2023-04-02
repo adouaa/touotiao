@@ -10,9 +10,13 @@
     </van-nav-bar>
     <div class="channel-tabs">
       <van-tabs v-model:active="active" animated swipeable>
-        <van-tab v-for="index in 4" :title="'标签 ' + index" :key="index">
+        <van-tab v-for="index in 6" :title="'标签 ' + index" :key="index">
           内容 {{ index }}
         </van-tab>
+        <template #nav-right>
+          <span class="placeholder"></span>
+          <van-icon class="hamburger-btn" name="wap-nav" />
+        </template>
       </van-tabs>
     </div>
   </div>
@@ -50,6 +54,7 @@ const active = ref(0)
   }
 
   :deep(.channel-tabs) {
+    position: relative;
     .van-tabs__nav {
       padding-bottom: 18px;
     }
@@ -67,6 +72,21 @@ const active = ref(0)
 
     .van-tabs__line {
       width: 31px;
+    }
+    .hamburger-btn {
+      width: 66px;
+      height: 82px;
+      display: flex;
+      align-items: center;
+      position: fixed;
+      right: -1px;
+      background-color: #fff;
+      opacity: 0.902;
+    }
+    .placeholder {
+      flex-shrink: 0;
+      width: 76px;
+      height: 82px;
     }
   }
 }
