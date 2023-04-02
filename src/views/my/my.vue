@@ -61,6 +61,13 @@
         </van-grid-item>
       </van-grid>
     </div>
+    <div class="cell">
+      <van-cell-group>
+        <van-cell title="消息通知" is-link />
+        <van-cell title="小智同学" is-link />
+      </van-cell-group>
+      <van-cell class="logout-cell" title="退出登录" />
+    </div>
   </div>
 </template>
 
@@ -157,6 +164,13 @@ const userStore = useUserStore()
   }
   .toutiao-lishi {
     color: #ff9d1d;
+  }
+}
+.cell {
+  .logout-cell {
+    color: #eb5253;
+    text-align: center;
+    margin-top: 10px;
   }
 }
 </style>
