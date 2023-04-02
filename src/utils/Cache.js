@@ -2,8 +2,10 @@ export const setItem = (key, data) => {
   // 判断：如果data是数组或者对象，则需要以JSON格式的字符串进行存储，否则直接存储data即可
   if (typeof data === 'object') {
     localStorage.setItem(key, JSON.stringify(data))
+  } else {
+    localStorage.setItem(key, data)
   }
-  localStorage.setItem(key, data)
+
 }
 
 export const getItem = (key) => {

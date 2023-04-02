@@ -61,8 +61,10 @@ import { login, getCode } from '@/api/user'
 import { showLoadingToast, showSuccessToast, showFailToast, showToast } from 'vant'
 import getCodeTime from '@/hooks/useCodeTime'
 import useUsetStore from '@/store/modules/user'
+import { useRouter } from 'vue-router'
 
 // 登录逻辑
+const router = useRouter()
 const userStore = useUsetStore()
 const loginForm = reactive({
   mobile: 1391111111,
@@ -89,6 +91,7 @@ const onSubmit = async () => {
     const res = await login(loginForm)
     userStore.setUserInfo(res.data)
     showSuccessToast('登录成功')
+    router.back()
   } catch (error) {
     if (error.response.status === 400) {
       showFailToast('手机号或者密码错误')

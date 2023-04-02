@@ -1,4 +1,4 @@
-import { getItem, setItem } from "@/utils/Cache";
+import { clear, getItem, setItem } from "@/utils/Cache";
 import { defineStore } from "pinia";
 
 const TOKEN_KEY = 'TOKEN_KEY'

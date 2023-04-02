@@ -66,15 +66,30 @@
         <van-cell title="消息通知" is-link />
         <van-cell title="小智同学" is-link />
       </van-cell-group>
-      <van-cell class="logout-cell" title="退出登录" />
+      <van-cell v-if="userStore.user" @click="logout" class="logout-cell" title="退出登录" />
     </div>
   </div>
 </template>
 
 <script setup>
 import useUserStore from '@/store/modules/user'
+import { useRouter } from 'vue-router'
+import { showConfirmDialog } from 'vant'
 
+const router = useRouter()
 const userStore = useUserStore()
+// 退出登录
+const logout = () => {
+  showConfirmDialog({
+    title: '标题',
+    message: '是否退出登录？退出后将不会保存记录哦~'
+  })
+    .then(() => {
+      // router.push('/login')
+      userStore.setUserInfo(null)
+    })
+    .catch((err) => err)
+}
 </script>
 
 <style lang="less" scoped>
