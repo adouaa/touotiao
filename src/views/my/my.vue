@@ -9,12 +9,8 @@
     <div v-else class="has-login-container">
       <div class="top">
         <div class="left">
-          <van-image
-            class="avatar"
-            round
-            src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
-          />
-          <span class="text"> 黑马头条号 </span>
+          <van-image class="avatar" round :src="userInfo.photo" />
+          <span class="text"> {{ userInfo.name }} </span>
         </div>
         <div class="right">
           <van-button class="editor-button" size="mini" round>编辑资料</van-button>
@@ -23,20 +19,20 @@
       <div class="bottom">
         <div class="data">
           <div class="item">
-            <span class="number">8</span>
+            <span class="number">{{ userInfo.art_count }}</span>
             <span class="type">头条</span>
           </div>
           <div class="item">
-            <span class="number">8</span>
-            <span class="type">头条</span>
+            <span class="number">{{ userInfo.follow_count }}</span>
+            <span class="type">关注</span>
           </div>
           <div class="item">
-            <span class="number">8</span>
-            <span class="type">头条</span>
+            <span class="number">{{ userInfo.fans_count }}</span>
+            <span class="type">粉丝</span>
           </div>
           <div class="item">
-            <span class="number">8</span>
-            <span class="type">头条</span>
+            <span class="number">{{ userInfo.like_count }}</span>
+            <span class="type">获赞</span>
           </div>
         </div>
       </div>
@@ -75,6 +71,8 @@
 import useUserStore from '@/store/modules/user'
 import { useRouter } from 'vue-router'
 import { showConfirmDialog } from 'vant'
+import { getUserInfo } from '@/api/user'
+import { ref } from 'vue'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -89,6 +87,18 @@ const logout = () => {
       userStore.setUserInfo(null)
     })
     .catch((err) => err)
+}
+
+// 如果有 token 则获取用户资料
+const userInfo = ref({})
+if (userStore.user) {
+  getUserInfo()
+    .then((res) => {
+      userInfo.value = res.data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 </script>
 
