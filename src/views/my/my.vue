@@ -41,6 +41,26 @@
         </div>
       </div>
     </div>
+    <div class="grid">
+      <van-grid :column-num="2" clickable>
+        <van-grid-item to="/collection">
+          <template #text>
+            <span class="text">收藏</span>
+          </template>
+          <template #icon>
+            <i class="toutiao toutiao-shoucang1"></i>
+          </template>
+        </van-grid-item>
+        <van-grid-item to="history">
+          <template #text>
+            <span class="text">历史</span>
+          </template>
+          <template #icon>
+            <i class="toutiao toutiao-lishi"></i>
+          </template>
+        </van-grid-item>
+      </van-grid>
+    </div>
   </div>
 </template>
 
@@ -123,6 +143,20 @@ const userStore = useUserStore()
         }
       }
     }
+  }
+}
+.grid {
+  .text {
+    font-size: 30px;
+  }
+  .toutiao {
+    font-size: 60px;
+  }
+  .toutiao-shoucang1 {
+    color: #eb5253;
+  }
+  .toutiao-lishi {
+    color: #ff9d1d;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'toutiao';
   /* Project id 3988367 */
-  src: url('//at.alicdn.com/t/c/font_3988367_6p9bs32qmx7.woff2?t=1680249882484') format('woff2'), url('//at.alicdn.com/t/c/font_3988367_6p9bs32qmx7.woff?t=1680249882484') format('woff'), url('//at.alicdn.com/t/c/font_3988367_6p9bs32qmx7.ttf?t=1680249882484') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_3988367_zym6diuznvq.woff2?t=1680422074918') format('woff2'), url('//at.alicdn.com/t/c/font_3988367_zym6diuznvq.woff?t=1680422074918') format('woff'), url('//at.alicdn.com/t/c/font_3988367_zym6diuznvq.ttf?t=1680422074918') format('truetype');
 }
 .toutiao {
   font-family: 'toutiao' !important;
@@ -9,6 +9,15 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.toutiao-shoucang1:before {
+  content: '\e62a';
+}
+.toutiao-lishi:before {
+  content: '\e63b';
+}
+.toutiao-shoucang:before {
+  content: '\e8b9';
 }
 .toutiao-shouji:before {
   content: '\e602';
