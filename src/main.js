@@ -7,6 +7,7 @@ import '@/styles/index.less'
 import 'amfe-flexible'
 
 // Toast
+import { showToast, showFailToast, showLoadingToast, showSuccessToast } from 'vant'
 import 'vant/es/toast/style';
 
 // Dialog
@@ -23,6 +24,10 @@ import router from './router'
 import store from '@/store'
 
 const app = createApp(App)
+app.component('showToast', showToast)
+app.component('showFailToast', showFailToast)
+app.component('showLoadingToast', showLoadingToast)
+app.component('showSuccessToast', showSuccessToast)
 app.use(router)
 app.use(store)
 app.mount('#app')

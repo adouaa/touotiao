@@ -13,3 +13,7 @@ export const getCode = (params) => request({
 export const getUserInfo = () => request({
   url: '/v1_0/user'
 })
+
+export const getUserChannel = () => request({
+  url: '/v1_0/user/channels'
+})

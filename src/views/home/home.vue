@@ -10,8 +10,8 @@
     </van-nav-bar>
     <div class="channel-tabs">
       <van-tabs v-model:active="active" animated swipeable>
-        <van-tab v-for="index in 6" :title="'标签 ' + index" :key="index">
-          内容 {{ index }}
+        <van-tab v-for="(item, index) in channels" :title="item.name" :key="item.id">
+          <article-list :id="index"></article-list>
         </van-tab>
         <template #nav-right>
           <span class="placeholder"></span>
@@ -23,13 +23,22 @@
 </template>
 
 <script setup>
+import { getUserChannel } from '@/api/user'
 import { ref } from 'vue'
+import articleList from './components/article-list.vue'
 
 const active = ref(0)
+const channels = ref([])
+getUserChannel()
+  .then((res) => {
+    channels.value = res.data.channels
+  })
+  .catch((err) => console.log('频道获取失败'))
 </script>
 
 <style lang="less" scoped>
 .home {
+  padding-bottom: 100px;
   :deep(.van-nav-bar__title) {
     max-width: unset;
   }
@@ -54,6 +63,7 @@ const active = ref(0)
   }
 
   :deep(.channel-tabs) {
+    margin-top: 10px;
     position: relative;
     .van-tabs__nav {
       padding-bottom: 18px;
