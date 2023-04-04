@@ -52,7 +52,6 @@ const onLoad = async () => {
     // }
 
     if (data.results.length) {
-      console.log(timestamp.value)
       list.value.push(...data.results)
       timestamp.value = data.pre_timestamp
       loading.value = false
@@ -74,7 +73,7 @@ const onRefresh = async () => {
       channel_id: props.id,
       timestamp: timestamp.value
     })
-    
+
     // if (Math.random() > 0.5) {
     //   JSON.parse('d2ds')
     // }
@@ -92,4 +91,9 @@ const onRefresh = async () => {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.article-list {
+  height: 79vh;
+  overflow-y: auto;
+}
+</style>
