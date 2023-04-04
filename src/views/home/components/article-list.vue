@@ -6,13 +6,14 @@
       finished-text="没有更多了"
       @load="onLoad"
     >
-      <van-cell v-for="item in list" :key="item" :title="item" />
+      <van-cell v-for="item in list" :key="item" :title="item.title" />
     </van-list>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { getArticles } from '@/api/article'
 
 const props = defineProps({
   id: {
@@ -24,23 +25,22 @@ const props = defineProps({
 const list = ref([])
 const loading = ref(false)
 const finished = ref(false)
+const timestamp = ref(Date.now())
 
-const onLoad = () => {
-  // 异步更新数据
-  // setTimeout 仅做示例，真实场景中一般为 ajax 请求
-  setTimeout(() => {
-    for (let i = 0; i < 10; i++) {
-      list.value.push(list.value.length + 1)
-    }
-
-    // 加载状态结束
+const onLoad = async () => {
+  console.log('请求中')
+  const { data } = await getArticles({
+    channel_id: props.id,
+    timestamp: timestamp.value
+  })
+  if (data.results.length) {
+    console.log(timestamp.value)
+    list.value.push(...data.results)
+    timestamp.value = data.pre_timestamp
     loading.value = false
-
-    // 数据全部加载完成
-    if (list.value.length >= 40) {
-      finished.value = true
-    }
-  }, 1000)
+  } else {
+    finished.value = true
+  }
 }
 </script>
 
