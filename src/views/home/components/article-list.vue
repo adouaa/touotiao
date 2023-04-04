@@ -74,9 +74,10 @@ const onRefresh = async () => {
       channel_id: props.id,
       timestamp: timestamp.value
     })
-    if (Math.random() > 0.5) {
-      JSON.parse('d2ds')
-    }
+    
+    // if (Math.random() > 0.5) {
+    //   JSON.parse('d2ds')
+    // }
 
     // 将数据追加到列表的 顶部
     list.value.unshift(...data.results)

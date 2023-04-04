@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <van-nav-bar class="page-nav-bar">
+    <van-nav-bar class="page-nav-bar" fixed>
       <template #title>
         <div class="search">
           <img class="logo" src="@/assets/image/logo.png" alt="" />
@@ -38,6 +38,7 @@ getUserChannel()
 
 <style lang="less" scoped>
 .home {
+  padding-top: 170px;
   padding-bottom: 100px;
   :deep(.van-nav-bar__title) {
     max-width: unset;
@@ -63,6 +64,14 @@ getUserChannel()
   }
 
   :deep(.channel-tabs) {
+    .van-tabs__wrap {
+      height: 82px;
+      position: fixed;
+      top: 92px;
+      left: 0;
+      right: 0;
+      z-index: 1;
+    }
     margin-top: 10px;
     position: relative;
     .van-tabs__nav {
