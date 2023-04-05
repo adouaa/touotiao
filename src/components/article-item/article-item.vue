@@ -70,6 +70,9 @@ const props = defineProps({
       .cover-image {
         flex: 1;
         height: 146px;
+        &:not(:last-child) {
+          padding-right: 4px;
+        }
       }
     }
   }
