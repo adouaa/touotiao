@@ -13,7 +13,7 @@
         error-text="请求失败，点击重新加载"
         @load="onLoad"
       >
-        <van-cell v-for="item in list" :key="item" :title="item.title" />
+        <articleItem v-for="(item, index) in list" :key="index" :article="item" />
       </van-list>
     </van-pull-refresh>
   </div>
@@ -23,6 +23,7 @@
 import { ref } from 'vue'
 import { getArticles } from '@/api/article'
 import { showToast } from 'vant'
+import articleItem from '@/components/article-item/article-item.vue'
 
 const props = defineProps({
   id: {
