@@ -23,6 +23,8 @@ import router from './router'
 
 import store from '@/store'
 
+import '@/utils/dayjs'
+
 const app = createApp(App)
 app.component('showToast', showToast)
 app.component('showFailToast', showFailToast)

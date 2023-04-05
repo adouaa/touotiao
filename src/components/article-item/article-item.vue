@@ -17,7 +17,7 @@
         <div class="info-wrap">
           <span class="auth">{{ article.aut_name }}</span>
           <span class="comm">{{ `${article.comm_count}评论` }}</span>
-          <span class="pub-time">{{ article.pubdate }}</span>
+          <span class="pub-time">{{ getRelativeTime(article.pubdate) }}</span>
         </div>
       </template>
       <template #default v-if="article.cover.type === 1">
@@ -28,6 +28,7 @@
 </template>
 
 <script setup name="ArticleItem">
+import { getRelativeTime } from '@/utils/dayjs'
 const props = defineProps({
   article: {
     type: Object,
