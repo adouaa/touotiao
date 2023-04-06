@@ -15,10 +15,20 @@
         </van-tab>
         <template #nav-right>
           <span class="placeholder"></span>
-          <van-icon class="hamburger-btn" name="wap-nav" />
+          <van-icon @click="channelEdit" class="hamburger-btn" name="wap-nav" />
         </template>
       </van-tabs>
     </div>
+
+    <!-- 底部弹出 -->
+    <van-popup
+      v-model:show="showChannelEdit"
+      round
+      closeable
+      position="bottom"
+      close-icon-position="top-left"
+      :style="{ height: '100%' }"
+    />
   </div>
 </template>
 
@@ -34,6 +44,12 @@ getUserChannel()
     channels.value = res.data.channels
   })
   .catch((err) => console.log('频道获取失败'))
+
+// 底部弹出
+const showChannelEdit = ref(false)
+const channelEdit = () => {
+  showChannelEdit.value = true
+}
 </script>
 
 <style lang="less" scoped>
