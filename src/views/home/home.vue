@@ -15,7 +15,7 @@
         </van-tab>
         <template #nav-right>
           <span class="placeholder"></span>
-          <van-icon @click="channelEdit" class="hamburger-btn" name="wap-nav" />
+          <van-icon @click="channelEditFn" class="hamburger-btn" name="wap-nav" />
         </template>
       </van-tabs>
     </div>
@@ -28,7 +28,9 @@
       position="bottom"
       close-icon-position="top-left"
       :style="{ height: '100%' }"
-    />
+    >
+      <channelEdit></channelEdit>
+    </van-popup>
   </div>
 </template>
 
@@ -36,6 +38,7 @@
 import { getUserChannel } from '@/api/user'
 import { ref } from 'vue'
 import articleList from './components/article-list.vue'
+import channelEdit from '@/views/home/components/channel-edit.vue'
 
 const active = ref(0)
 const channels = ref([])
@@ -47,7 +50,7 @@ getUserChannel()
 
 // 底部弹出
 const showChannelEdit = ref(false)
-const channelEdit = () => {
+const channelEditFn = () => {
   showChannelEdit.value = true
 }
 </script>
